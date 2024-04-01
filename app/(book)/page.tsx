@@ -19,7 +19,7 @@ export default function Home() {
   });
 
   React.useEffect(() => {
-    BookAction.list(setData, query)      
+    BookAction.list(setData, query);
   }, [query, query.take, query.filterValues]);
 
   React.useEffect(() => {
@@ -57,17 +57,30 @@ export default function Home() {
     });
   };
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setQuery(prev => ({ ...prev, search: value }));
+  };
+
   const tags = Object.values(BookTagEnum);
 
   return (
-    <main >
-      <div className="flex justify-center items-center">
-        <div className="flex flex-wrap p-4">
+    <main className="px-4 sm:px-8 md:px-24 lg:px-32 xl:px-48">
+      <div className="flex justify-center items-center flex-col">
+        <div className="w-full p-2">
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={handleSearch}
+            className="w-full px-3 py-2 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none"
+          />
+        </div>
+        <div className="flex flex-wrap p-2">
           {tags.map((tag) => (
             <button
               key={tag}
               onClick={() => handleFilter(tag)}
-              className={`m-1 font-semibold py-2 px-4 rounded-full ${
+              className={`m-1 font-semibold py-1 px-4 rounded-full ${
                 query.filterValues?.includes(tag)
                   ? "bg-blue-900 hover:bg-blue-500 text-white"
                   : "bg-gray-200 hover:bg-gray-300 text-black"
@@ -78,7 +91,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <div className="flex min-h-screen flex-col items-center justify-between py-4 px-4 sm:px-8 md:px-24 lg:px-32 xl:px-48">
+      <div className="flex min-h-screen flex-col items-center justify-between py-2">
         <div className="mb-32 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {data?.map((book) => (
             <BookCard
