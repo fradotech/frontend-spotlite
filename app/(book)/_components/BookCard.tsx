@@ -34,7 +34,7 @@ const BookCard: React.FC<CardProps> = ({
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="m-0.5 bg-blue-900 rounded-5 px-1 py-0.5 text-xs font-semibold text-white"
+            className="m-1 bg-blue-900 rounded-5 px-2 py-0.5 text-xs font-semibold text-white rounded"
           >
             {tag}
           </span>

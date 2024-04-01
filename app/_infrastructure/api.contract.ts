@@ -1,5 +1,5 @@
 export type TApiQueryRequest = {
-  take?: number;
+  take: number;
   search?: string;
   filterBy?: string;
   filterValue?: string;

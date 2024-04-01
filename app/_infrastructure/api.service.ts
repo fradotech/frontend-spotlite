@@ -33,7 +33,11 @@ export class API {
       const queryString = params
         ? "?" +
           new URLSearchParams(
-            Object.entries(params).map(([key, value]) => [key, String(value)])
+            Object.entries(params).flatMap(([key, value]) =>
+              Array.isArray(value)
+                ? value.map((v, i) => [`${key}[${i}]`, String(v)])
+                : [[key, String(value)]]
+            )
           ).toString()
         : "";
 

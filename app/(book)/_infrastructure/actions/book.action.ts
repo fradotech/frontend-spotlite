@@ -8,12 +8,12 @@ import {
 
 export class BookAction {
   static async list(
-    setData: React.Dispatch<React.SetStateAction<TBook[]>>,
+    setData?: React.Dispatch<React.SetStateAction<TBook[]>>,
     query?: TApiQueryRequest
-  ): Promise<void> {
+  ): Promise<void | TBook[]> {
     API.get("/books", query).then(
       (response: TApiResponse<TApiListResponse<TBook>>) => {
-        setData(response.data.rows);
+        return setData ? setData(response.data.rows) : response.data.rows;
       }
     );
   }
