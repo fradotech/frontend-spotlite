@@ -6,8 +6,13 @@ export type TApiQueryRequest = {
   filterValues?: Array<string>;
 }
 
-export type TApiResponse = {
+export type TApiListResponse<T> = {
+  count: number;
+  rows: Array<T>;
+}
+
+export type TApiResponse<T> = {
   message?: string;
-  data: Record<string, any> | null;
+  data: T;
 };
 

@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosHeaders, RawAxiosRequestHeaders } from "axios";
 import { config } from "./config";
 import { TApiQueryRequest, TApiResponse } from "./api.contract";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
 
 const headers: RawAxiosRequestHeaders | AxiosHeaders = {
   Authorization:
@@ -12,7 +13,7 @@ const headers: RawAxiosRequestHeaders | AxiosHeaders = {
 
 const axiosInstance = axios.create({ baseURL: config.server.hostApi, headers });
 
-const notificationError = (e: AxiosError<TApiResponse>): void => {
+const notificationError = (e: AxiosError<TApiResponse<unknown>>): void => {
   // if (e.response?.data.message === 'Forbidden') {
   //   return
   // } else if (e.response?.data.message === 'Unauthorized') {
@@ -34,10 +35,7 @@ export class API {
         ? "?" + new URLSearchParams(Object.entries(String(params)))
         : "";
 
-      const token =
-        typeof window !== "undefined"
-          ? localStorage.getItem("_accessToken")
-          : undefined;
+      const token = Cookies.get("_accessToken");
 
       const headers = new Headers();
       headers.append("Authorization", token || "");
@@ -48,7 +46,7 @@ export class API {
           headers,
           ...(config.server.nodeEnv !== "production"
             ? {
-                next: { revalidate: 60 },
+                next: { revalidate: 1 },
               }
             : undefined),
         }
@@ -57,7 +55,7 @@ export class API {
 
       return data.json();
     } catch (e: unknown) {
-      notificationError(e as AxiosError<TApiResponse>);
+      notificationError(e as AxiosError<TApiResponse<unknown>>);
       return e;
     }
   }
@@ -96,7 +94,7 @@ export class API {
 
       return response.data;
     } catch (e: unknown) {
-      notificationError(e as AxiosError<TApiResponse>);
+      notificationError(e as AxiosError<TApiResponse<unknown>>);
       return e;
     }
   }

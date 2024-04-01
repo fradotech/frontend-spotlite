@@ -1,9 +1,9 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import { API } from "../_infrastructure/api.service";
-import { TApiResponse } from "../_infrastructure/api.contract";
 import { useRouter } from 'next/navigation';
+import { TApiResponse } from "@/app/_infrastructure/api.contract";
+import { API } from "@/app/_infrastructure/api.service";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -28,7 +28,6 @@ const LoginPage = () => {
     if (response?.data?._accessToken) {
       const _accessToken = `Bearer ${response.data._accessToken}`;
       localStorage.setItem("_accessToken", _accessToken);
-      console.log({ _accessToken });
       router.push('/');
     } else {
       setError(response?.data?.message || "An error occurred");
