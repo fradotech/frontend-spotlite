@@ -20,7 +20,7 @@ export default function Home() {
 
   React.useEffect(() => {
     BookAction.list(setData, query);
-  }, [query, query.take, query.filterValues]);
+  }, [query]);
 
   React.useEffect(() => {
     const options = { rootMargin: "20%", threshold: 1.0 };
