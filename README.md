@@ -14,3 +14,9 @@
 This project has several scripts predefined in `package.json`:
 
 1. **Start**: To run the application in development mode, use the `yarn start` command
+
+# Main Feature
+
+1. **Infinity Scroll**: If you scroll down page of books, the books will reload more, next data loading occurs when reaches 80% of the floor
+2. **Search Book**: You can search book by `title`
+3. **Multiple Filter Status**: You can filter just by click tags on the top of list, and you can click multiple tags for multiple filters
