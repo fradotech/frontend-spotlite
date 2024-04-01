@@ -17,7 +17,7 @@ const BookCard: React.FC<CardProps> = ({
   tags,
 }) => {
   return (
-    <div className="group rounded-lg border border-transparent bg-black px-4 py-3 transition-colors hover:dark:border-gray-700 hover:dark:bg-gray-900">
+    <div className="group rounded-lg px-4 py-3 hover:dark:bg-gray-900">
       <Image
         src={coverUrl}
         alt={title}
@@ -34,7 +34,7 @@ const BookCard: React.FC<CardProps> = ({
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="m-1 bg-blue-900 rounded-5 px-2 py-0.5 text-xs font-semibold text-white rounded"
+            className="m-1 bg-blue-900 rounded-5 px-2 py-0.5 text-xs text-white rounded"
           >
             {tag}
           </span>

@@ -60,7 +60,7 @@ export default function Home() {
   const tags = Object.values(BookTagEnum);
 
   return (
-    <main style={{ backgroundColor: "#101010" }}>
+    <main >
       <div className="flex justify-center items-center">
         <div className="flex flex-wrap p-4">
           {tags.map((tag) => (
