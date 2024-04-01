@@ -65,7 +65,7 @@ export default function Home() {
   const tags = Object.values(BookTagEnum);
 
   return (
-    <main className="px-4 sm:px-8 md:px-24 lg:px-32 xl:px-48">
+    <main className="px-4 sm:px-8 md:px-24 lg:px-32 xl:px-64">
       <div className="flex justify-center items-center flex-col">
         <div className="w-full p-2">
           <input
@@ -92,7 +92,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex min-h-screen flex-col items-center justify-between py-2">
-        <div className="mb-32 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="mb-32 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-0 sm:gap-4">
           {data?.map((book) => (
             <BookCard
               key={book.id}

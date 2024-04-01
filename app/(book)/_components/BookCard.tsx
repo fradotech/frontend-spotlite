@@ -17,7 +17,7 @@ const BookCard: React.FC<CardProps> = ({
   tags,
 }) => {
   return (
-    <div className="group rounded-lg px-4 py-3 hover:dark:bg-gray-900">
+    <div className="group rounded-lg px-4 py-3 hover:dark:bg-gray-900 active:bg-gray-900 max-w-52 max-h-76">
       <Image
         src={coverUrl}
         alt={title}
@@ -25,7 +25,7 @@ const BookCard: React.FC<CardProps> = ({
         width={200}
         height={300}
       />
-      <h2 className="mb-1 text-xl font-semibold">{title}</h2>
+      <h2 className="mb-1 text-md md:text-lg font-semibold">{title}</h2>
       <p className="m-0 max-w-[20ch] text-xs opacity-50">{writerName}</p>
       <div className="mt-0.5 text-amber-600">
         <span className="font-bold text-lg">${pointPrice.toFixed(2)} USD</span>
@@ -34,7 +34,7 @@ const BookCard: React.FC<CardProps> = ({
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="m-1 bg-blue-900 rounded-5 px-2 py-0.5 text-xs text-white rounded"
+            className="m-0.5 bg-blue-900 rounded px-2 py-0.5 text-xs text-white rounded"
           >
             {tag}
           </span>
