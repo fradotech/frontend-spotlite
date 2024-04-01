@@ -1,22 +1,32 @@
 "use client";
 
-import {
-  TApiListResponse,
-  TApiResponse,
-} from "../_infrastructure/api.contract";
-import { API } from "../_infrastructure/api.service";
 import { TBook } from "./_infrastructure/types/book.entity";
 import BookCard from "./_components/BookCard";
 import { BookTagEnum } from "./_infrastructure/enums/book.enum";
 import React from "react";
 import { BookAction } from "./_infrastructure/actions/book.action";
 
+const dataLoadScroll = 20;
+
 export default function Home() {
   const [data, setData] = React.useState<TBook[]>([]);
+  const [dataTake, setDataTake] = React.useState<number>(dataLoadScroll);
+  const loader = React.useRef(null);
 
   React.useEffect(() => {
-    BookAction.list(setData, { take: 20 });
+    BookAction.list(setData, { take: dataTake });
+  }, [dataTake]);
+
+  React.useEffect(() => {
+    const options = { rootMargin: "20%", threshold: 1.0 };
+    const observer = new IntersectionObserver(handleObserver, options);
+    if (loader.current) observer.observe(loader.current);
   }, []);
+
+  const handleObserver = (entities: IntersectionObserverEntry[]) => {
+    const target = entities[0];
+    if (target.isIntersecting) setDataTake((prev) => prev + dataLoadScroll);
+  };
 
   const tags = Object.values(BookTagEnum);
 
@@ -46,6 +56,7 @@ export default function Home() {
               tags={book.tags}
             />
           ))}
+          <div ref={loader} />
         </div>
       </div>
     </main>
