@@ -6,4 +6,5 @@ export type TUser = TBaseEntity & {
   email: string;
   password: string;
   point: number;
+  _accessToken: string;
 };

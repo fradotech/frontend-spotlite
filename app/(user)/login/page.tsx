@@ -1,14 +1,12 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import { useRouter } from 'next/navigation';
-import { TApiResponse } from "@/app/_infrastructure/api.contract";
-import { API } from "@/app/_infrastructure/api.service";
+import { useRouter } from "next/navigation";
+import { UserAuthAction } from "../_infrastructure/actions/user-auth.action";
 
 const LoginPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState<string>();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     setIsLoading(true);
@@ -23,15 +21,9 @@ const LoginPage = () => {
       ).value,
     };
 
-    const response: TApiResponse = await API.post("/users/login", formData);
+    const isLogged = await UserAuthAction.login(formData);
+    if (isLogged) router.push("/");
 
-    if (response?.data?._accessToken) {
-      const _accessToken = `Bearer ${response.data._accessToken}`;
-      localStorage.setItem("_accessToken", _accessToken);
-      router.push('/');
-    } else {
-      setError(response?.data?.message || "An error occurred");
-    }
     setIsLoading(false);
   }
 
@@ -42,11 +34,6 @@ const LoginPage = () => {
           <h2 className="mt-3 text-center text-3xl text-gray-100">
             Login to your account
           </h2>
-          {error && (
-            <div className="bg-red-150 p-3 text-red-700 rounded mt-3">
-              {error}
-            </div>
-          )}
         </div>
         <form className="mt-8 space-y-6" onSubmit={onSubmit}>
           <input
