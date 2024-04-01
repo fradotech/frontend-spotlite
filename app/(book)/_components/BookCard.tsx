@@ -9,7 +9,7 @@ interface CardProps {
   tags: string[];
 }
 
-const Card: React.FC<CardProps> = ({
+const BookCard: React.FC<CardProps> = ({
   title,
   writerName,
   coverUrl,
@@ -44,4 +44,4 @@ const Card: React.FC<CardProps> = ({
   );
 };
 
-export default Card;
+export default BookCard;
