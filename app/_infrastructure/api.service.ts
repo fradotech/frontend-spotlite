@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosHeaders, RawAxiosRequestHeaders } from "axios";
 import { config } from "./config";
 import { TApiQueryRequest, TApiResponse } from "./api.contract";
+import { toast } from 'react-toastify';
 
 const headers: RawAxiosRequestHeaders | AxiosHeaders = {
   Authorization:
@@ -20,7 +21,10 @@ const notificationError = (e: AxiosError<TApiResponse>): void => {
   //   location.reload()
   // }
 
-  console.error({ apiError: e.response?.data?.message || String(e) });
+  const errorMessage = e.response?.data?.message || String(e);
+
+  console.error({ apiError: errorMessage || String(e) });
+  toast.error(errorMessage);
 };
 
 export class API {
@@ -53,7 +57,6 @@ export class API {
 
       return data.json();
     } catch (e: unknown) {
-      console.log({ e });
       notificationError(e as AxiosError<TApiResponse>);
       return e;
     }
