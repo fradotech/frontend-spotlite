@@ -17,24 +17,24 @@ const Card: React.FC<CardProps> = ({
   tags,
 }) => {
   return (
-    <div className="group rounded-lg border border-transparent bg-black px-5 py-4 transition-colors hover:dark:border-gray-700 hover:dark:bg-gray-900">
+    <div className="group rounded-lg border border-transparent bg-black px-4 py-3 transition-colors hover:dark:border-gray-700 hover:dark:bg-gray-900">
       <Image
         src={coverUrl}
         alt={title}
-        className="w-full h-64 object-cover mb-4 rounded"
-        width={300}
-        height={400}
+        className="w-full h-48 object-cover mb-2 rounded"
+        width={200}
+        height={300}
       />
-      <h2 className="mb-3 text-2xl font-semibold">{title}</h2>
-      <p className="m-0 max-w-[30ch] text-sm opacity-50">{writerName}</p>
-      <div className="mt-2 text-red-800">
-        <span className="font-bold">${pointPrice.toFixed(2)} USD</span>
-      </div>{" "}
-      <div className="flex flex-wrap">
+      <h2 className="mb-1 text-xl font-semibold">{title}</h2>
+      <p className="m-0 max-w-[20ch] text-xs opacity-50">{writerName}</p>
+      <div className="mt-0.5 text-amber-600">
+        <span className="font-bold text-lg">${pointPrice.toFixed(2)} USD</span>
+      </div>
+      <div className="flex flex-wrap mt-0.5">
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="m-1 bg-blue-900 rounded-5 px-2 py-1 text-sm font-semibold text-white"
+            className="m-0.5 bg-blue-900 rounded-5 px-1 py-0.5 text-xs font-semibold text-white"
           >
             {tag}
           </span>
