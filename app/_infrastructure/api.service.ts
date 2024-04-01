@@ -2,7 +2,6 @@ import axios, { AxiosError, AxiosHeaders, RawAxiosRequestHeaders } from "axios";
 import { config } from "./config";
 import { TApiQueryRequest, TApiResponse } from "./api.contract";
 import { toast } from "react-toastify";
-import Cookies from 'js-cookie';
 
 const headers: RawAxiosRequestHeaders | AxiosHeaders = {
   Authorization:
@@ -32,11 +31,13 @@ export class API {
   static async get(endpoint: string, params?: TApiQueryRequest): Promise<any> {
     try {
       const queryString = params
-        ? "?" + new URLSearchParams(Object.entries(String(params)))
+        ? "?" +
+          new URLSearchParams(
+            Object.entries(params).map(([key, value]) => [key, String(value)])
+          ).toString()
         : "";
 
-      const token = Cookies.get("_accessToken");
-
+      const token = localStorage.getItem("_accessToken");
       const headers = new Headers();
       headers.append("Authorization", token || "");
 

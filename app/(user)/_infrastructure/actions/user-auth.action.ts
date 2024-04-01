@@ -4,10 +4,10 @@ import { TApiResponse } from "@/app/_infrastructure/api.contract";
 
 export class UserAuthAction {
   static async account(
-    setUser: React.Dispatch<React.SetStateAction<TUser | null>>
+    setData: React.Dispatch<React.SetStateAction<TUser | null>>
   ): Promise<void> {
     API.get("/users/account").then((response: TApiResponse<TUser>) => {
-      setUser(response.data);
+      setData(response.data);
     });
   }
 

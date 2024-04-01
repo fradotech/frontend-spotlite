@@ -1,3 +1,5 @@
+"use client";
+
 import {
   TApiListResponse,
   TApiResponse,
@@ -6,12 +8,15 @@ import { API } from "../_infrastructure/api.service";
 import { TBook } from "./_infrastructure/types/book.entity";
 import BookCard from "./_components/BookCard";
 import { BookTagEnum } from "./_infrastructure/enums/book.enum";
+import React from "react";
+import { BookAction } from "./_infrastructure/actions/book.action";
 
-export default async function Home() {
-  const response: TApiResponse<TApiListResponse<TBook>> = await API.get(
-    "/books"
-  );
-  const books = response.data.rows;
+export default function Home() {
+  const [data, setData] = React.useState<TBook[]>([]);
+
+  React.useEffect(() => {
+    BookAction.list(setData, { take: 20 });
+  }, []);
 
   const tags = Object.values(BookTagEnum);
 
@@ -31,7 +36,7 @@ export default async function Home() {
       </div>
       <div className="flex min-h-screen flex-col items-center justify-between py-8 px-4 sm:px-8 md:px-24 lg:px-32 xl:px-48">
         <div className="mb-32 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {books?.map((book) => (
+          {data?.map((book) => (
             <BookCard
               key={book.id}
               title={book.title}
