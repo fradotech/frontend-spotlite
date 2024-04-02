@@ -1,11 +1,9 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import { useRouter } from "next/navigation";
 import { UserAuthAction } from "../_infrastructure/actions/user-auth.action";
 
 const LoginPage = () => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -22,7 +20,7 @@ const LoginPage = () => {
     };
 
     const isLogged = await UserAuthAction.login(formData);
-    if (isLogged) router.push("/");
+    if (isLogged) location.href = "/";
 
     setIsLoading(false);
   }
