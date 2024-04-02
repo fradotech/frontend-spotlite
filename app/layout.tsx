@@ -43,7 +43,7 @@ export default function RootLayout({
                   <span className="font-semibold">{user?.name}</span>
                   <button
                     onClick={() => localStorage.removeItem("_accessToken")}
-                    className="py-2 px-4 font-sm rounded"
+                    className="py-2 px-4 font-sm text-red-400 rounded"
                   >
                     Logout
                   </button>
